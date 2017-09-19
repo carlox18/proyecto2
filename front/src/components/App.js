@@ -5,33 +5,37 @@ import Main from "./Main";
 import LoginScreen from '../containers/LoginScreen';
 import HomePage from "./HomePage";
 import Welcome from "./Welcome";
+import Clubs from "./Clubs";
 
 
 class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
-			mainPage:[],
 			loginPage:[],
-			userId:"",
+			userId:null,
+			mainPage:[],
+			name:"",
+			email:""
 		}
 	}
-	componentWillMount(){
-    var welcomePage =[];
-    welcomePage.push(<Welcome appContext={this}/>);
-    this.setState({
-                  mainPage:welcomePage
-                    })
+  deleteUser(){
+  	this.setState({
+  		userId:null
+  	})
   }
 
 	render() {
 			return (<div>
 			<Main/>
-				<Header appContext={this} userId ={this.state.userId} />
-				{this.state.mainPage}
+				<Header appContext={this} userId ={this.state.userId} deleteUser={this.deleteUser.bind(this)} name={this.state.name} email={this.state.email}/>
+				{!this.state.userId && this.state.loginPage.length==0 && <Welcome appContext={this}/>}
+				{this.state.userId && this.state.mainPage}
 				{this.state.loginPage}
 				</div>
 				)
 		}
+		
 }
+
 export default App;

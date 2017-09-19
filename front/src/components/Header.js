@@ -29,8 +29,8 @@ class Account extends React.Component{
       </p>
       </div>
       <div className="col-lg-8">
-      <p className="text-left"><strong>Nombre Apellido</strong></p>
-      <p className="text-left small">correoElectronico@email.com</p>
+      <p className="text-left"><strong>{this.props.parentContext.props.name}</strong></p>
+      <p className="text-left small">{this.props.parentContext.props.email}</p>
       <p className="text-left">
       </p>
       </div>
@@ -43,7 +43,7 @@ class Account extends React.Component{
       <div className="row">
       <div className="col-lg-12">
       <p>
-      <a href="#" className="btn btn-danger btn-block">Cerrar Sesion</a>
+      <a href="#" onClick={(event) => this.handleClick(event)} className="btn btn-danger btn-block">Cerrar Sesion</a>
       </p>
       </div>
       </div>
@@ -54,6 +54,9 @@ class Account extends React.Component{
       </ul>
       );
   }
+  handleClick(event){
+    this.props.deleteUser;
+  }
 };
 
 
@@ -62,43 +65,24 @@ class Header extends React.Component {
     super(props);
   }
   render() {
-    var classLogin="none";
-    var classHome="none";
-    var main = this.props.appContext.state.mainPage[0];
-    if(main != null && (main.type.name =="Welcome" || main.type.name =="t")) {
-      classLogin="block";
-      classHome="none";
-    }
-    else if(main == undefined){
-      classHome="none";
-      classLogin="none";
-    }
-    else{
-      classHome = "block";
-      classLogin = "none";
-    }
     return (
       <Navbar>
-      <Navbar.Header>
+      {this.props.userId && <Navbar.Header>
       <Navbar.Brand >
       <Menu >
-      <a id="home" className="menu-item" href="#" onClick={(event) => this.handleClickHome(event)}>Home</a>
-      <a href="#" onClick={(event) => this.handleClick2(event)}>Mis clubes de lectura</a>
-      <a id="contact" className="menu-item" href="/contact">Contact</a>
-      <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+      <a id="home" className="menu-item" href="#" onClick={(event) => this.handleClickClubs(event)}>Mis Clubes</a>
+      <a href="#" onClick={(event) => this.handleClickExplore(event)}>Explorar</a>
       </Menu>
       </Navbar.Brand>
-      </Navbar.Header>
+      </Navbar.Header>}
       <Link to="/">BookConnect</Link>
 
       <Nav className="account">
-      <NavItem className={classLogin} onClick={(event) => this.handleClick(event)}>Login/SignUp</NavItem>
+      {!this.props.userId && <NavItem onClick={(event) => this.handleClick(event)}>Login/SignUp</NavItem>}
       <MenuItem divider />
       </Nav>
-      <div className={classHome}>
-      <Account></Account>
-      </div>
-      </Navbar>
+      {this.props.userId && <div><Account deleteUser={this.props.deleteUser} parentContext={this}></Account></div>}
+      </Navbar>   
       );
   }
   handleClick(event){
@@ -106,12 +90,13 @@ class Header extends React.Component {
     login.push(<LoginScreen appContext ={this.props.appContext} />);
     this.props.appContext.setState({mainPage:[],loginPage:login});
   }
-  handleClick2(event){
+  handleClickClubs(event){
     var clubs=[];
+    console.log(this.props.userId)
     clubs.push(<Clubs appContext ={this.props.appContext} userId = {this.props.userId}/>);
     this.props.appContext.setState({mainPage:clubs,loginPage:[]});
   }
-  handleClickHome(event){
+  handleClickExplore(event){
     var home=[];
     home.push(<HomePage appContext ={this.props.appContext}/>);
     this.props.appContext.setState({mainPage:home, loginPage:[]});

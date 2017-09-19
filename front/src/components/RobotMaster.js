@@ -13,43 +13,44 @@ const propTypes = {
 };
 
 class RobotMaster extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      _id: this.props._id,
+      nombre:this.props.nombre,
+      desc:this.props.desc,
+      keywords:this.props.keywords,
+      ids_admin:this.props.ids_admin,
+      members:this.props.members,
+      messages:this.props.messages,
+      userId:this.props.userId
+    }
+  };
+
   render() {
     const { _id,nombre, desc, keywords, ids_admin, members, messages } = this.props;
     const listClass = `list-item card`;
     const style = { zIndex: 100 - this.props.index};
-    console.log(messages)
-    if(messages && messages.length > 0){
-      var text = messages[0].text;
-    }
+
     return (
-      <li id={_id} href="#" onClick={(event) => this.handleClick(event)} className={listClass} style={style}>
-        <span>
-          <div className="robot-mug">
-            <h1 className="robot-name">{nombre}</h1>                                   
-          </div>          
-          <div className="robot-info">            
-            <h2 className="robot-weapon">Descripción</h2>
-            <div>{desc}</div>            
-            <h2 className="robot-weakness">Palabras clave</h2>
-            <div>{keywords}</div>
-          </div>
-          <div className="robot-other">
-            <h1 className="robot-serial">Último mensaje</h1> <div>{text}</div>   
-          </div>
-          <button onClick={this.props.clickHandler}>
-            <i className="fa fa-close"/>
-          </button>
-          <div className="clearfix"/>
-        </span>
-      </li>
-    );
+      <li className="clearfix" onClick={(event) => this.handleClick(event)}>
+      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+      <div className="about">{desc}
+      <div className="name">{nombre}</div>
+      <div className="status">
+      <i className="fa fa-circle online" /> online
+      </div>
+      </div>
+      </li>     
+      );
   }
   handleClick(event){
     var chat=[];
-    console.log(this.props);
-    chat.push(<Chat _id ={this.props._id} nombre={this.props.nombre} desc={this.props.desc} keywords = {this.props.keywords} ids_admin={this.props.ids_admin}
-      members = {this.props.members} messages={this.props.messages} userId = {this.props.userId}/>);
-    this.props.appContext.setState({mainPage:chat});
+    var mensajes = this.state.messages!=undefined ? this.state.messages : [];
+    chat.push(<Chat _id ={this.state._id} nombre={this.state.nombre} desc={this.state.desc} keywords = {this.state.keywords} ids_admin={this.state.ids_admin}
+      members = {this.state.members} messages={mensajes} userId = {this.state.userId}/>)
+    this.props.parentContext.setState({chat:chat});
   }
 
 }

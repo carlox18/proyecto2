@@ -27,8 +27,9 @@ p {
     margin-bottom: 1em;
 }
 .Hero{
-    background-position:bottom;
-
+    background-position: bottom;
+    position:absolute;
+    top:0;
 }
 
 
@@ -90,7 +91,6 @@ p {
     transition: border .125s ease;
 }    
 img {
-    width: 100%;
     display: block;
 }
 
@@ -115,9 +115,8 @@ img {
 
 .Hero {
     width: 100%;
-    position: relative;
     background-size: cover;
-    min-height: 800px;
+    min-height: 100%;
 }
 .Hero .content {
     position: relative;

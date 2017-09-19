@@ -70,9 +70,7 @@ class Register extends Component {
      console.log(response);
      if(response.status == 200){
        window.alert("Signup successfull");
-       var homePage=[];
-       homePage.push(<HomePage/>);
-       self.props.appContext.setState({loginPage:[],mainPage:homePage,userId:response.data.data._id});
+       self.props.appContext.setState({loginPage:[],userId:response.data.data._id, name:response.data.name ,email:response.data.email});
      }
      else{
       window.alert("Error signing up");

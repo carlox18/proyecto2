@@ -5,6 +5,7 @@ import React from 'react';
 import axios from 'axios';
 import App from "./App";
 import HomePage from "./HomePage";
+import Clubs from "./Clubs";
 
 
 class Login extends React.Component {
@@ -49,11 +50,11 @@ class Login extends React.Component {
    axios.post(apiBaseUrl, payload)
    .then(function (response) {
     console.log(response)
-    if(response.status == 200){
+    if(response.status == 200 && response.data != null){
      window.alert("Login successful");
-     var homePage=[];
-     homePage.push(<HomePage/>);
-     self.props.appContext.setState({loginPage:[],mainPage:homePage,userId:response.data._id});
+     var home=[];
+     home.push(<Clubs userId={response.data._id}/>);
+     self.props.appContext.setState({loginPage:[],mainPage:home,userId:response.data._id});
    }
    else if(response.status == 204){
      console.log("Username password do not match");

@@ -15,9 +15,7 @@ class Welcome extends React.Component{
     
         
         return (
-            <div>
                 <Hero />
-            </div>
         );
     }
 };

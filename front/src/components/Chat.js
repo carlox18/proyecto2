@@ -16,6 +16,7 @@ const propTypes = {
 };
 
 class Chat extends React.Component {
+
 	constructor(props) {
 		super(props);
 
@@ -23,49 +24,69 @@ class Chat extends React.Component {
 			mensajes:this.props.messages
 		}
 	}
+	componentDidMount() {
+		var element = document.getElementsByClassName("chat-history")[0];
+		element.scrollTop = element.scrollHeight;
+	}
 	render() {
-		const { _id,nombre, desc, keywords, ids_admin, members, messages } = this.props;
+		const { _id,nombre, desc, keywords, ids_admin, members } = this.props;
 		const listClass = `list-item card`;
 		const style = { zIndex: 100 - this.props.index};
-		var mensajes = this.state.mensajes;
-		if(mensajes == undefined)
-			mensajes = [];
+		const self = this;
+		var messages = this.state.mensajes;
+		if(messages == undefined)
+			messages = [];
 		return (
-			<div class="container clearfix">
-			<div class="chat">
-			<div class="chat-header clearfix">
-			<div class="chat-about">
-			<div class="chat-with">{this.props.nombre}</div>
-			<div class="chat-num-messages">{this.props.descripcion}</div>
+			<div className="chat">
+			<div className="chat-header clearfix">
+			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+			<div className="chat-about">
+			<div className="chat-with">{nombre}</div>
+			<div className="chat-num-messages">{desc}</div>
 			</div>
-			<i class="fa fa-star"></i>
-			</div>
+			<i className="fa fa-star" />
+			</div> 
 			<div className="chat-history">
 			<ul>
-			{mensajes.map(function(msg, index){
-				return (<li className="clearfix">
-					<div className="message-data align-right">
-					<span className="message-data-time"></span> &nbsp; &nbsp;
-					<span className="message-data-name">{msg.sender_name}</span> <i className="fa fa-circle me" />
-					</div>
-					<div className="message other-message float-right">
-					{msg.text}
-					</div>
-					</li>);
+			{messages.map(function(msg, index){
+				if( msg.sender == self.props.userId){
+					return(
+						<li className="clearfix">
+						<div className="message-data align-right">
+						<span className="message-data-time"></span> &nbsp; &nbsp;
+						<span className="message-data-name">{msg.sender_name}</span> <i className="fa fa-circle me" />
+						</div>
+						<div className="message other-message float-right">
+						{msg.text}
+						</div>
+						</li>)
+				}
+				else{
+					return(
+						<li>
+						<div className="message-data">
+						<span className="message-data-name"><i className="fa fa-circle online" /> {msg.sender_name}</span>
+						<span className="message-data-time">10:12 AM, Today</span>
+						</div>
+						<div className="message my-message">
+						{msg.text}
+						</div>
+						</li>
+						)
+				}
 			})}
 			</ul>
-		</div> {/* end chat-history */}
-		<div className="chat-message clearfix">
-		<textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows={3} defaultValue={""} />
-		<i className="fa fa-file-o" /> &nbsp;&nbsp;&nbsp;
-		<i className="fa fa-file-image-o" />
-		<button onClick={(event) => this.handleClick(event)}>Send</button>
-	</div> {/* end chat-message */}
-	</div>
-	</div>
 
-	);
-	}
+			</div> 
+			<div className="chat-message clearfix">
+			<textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows={3} defaultValue={""} />
+			<i className="fa fa-file-o" /> &nbsp;&nbsp;&nbsp;
+			<i className="fa fa-file-image-o" />
+			<button onClick={(event) => this.handleClick(event)}>Send</button>
+			</div> 
+			</div>
+			);
+	}	
 	handleClick(event){
 		var elem = document.getElementById("message-to-send");
 		var x = elem.value;
@@ -82,6 +103,7 @@ class Chat extends React.Component {
 			if(response.status == 200){
 				elem.value="";
 				self.setState({mensajes:response.data});
+
 			}
 		})
 		.catch(function (error) {
@@ -89,6 +111,7 @@ class Chat extends React.Component {
 		});
 	}
 }
+
 
 Chat.PropTypes = propTypes;
 
