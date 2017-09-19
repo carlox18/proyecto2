@@ -23,6 +23,7 @@ exports.get = function(){
 exports.close = function(done){
   if(state.conn){
     state.conn.close(function(err, result){
+      // DEBERÍA MANEJAR EL ERROR
       state.conn = null;
       state.mode = null;
       done();
