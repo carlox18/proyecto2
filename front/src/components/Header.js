@@ -1,5 +1,8 @@
 import React from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+
+// Switch y Route nunca se usaban
+import { Link } from 'react-router-dom';
+
 import { Navbar, Nav, NavItem, MenuItem, Dropdown, Glyphicon} from "react-bootstrap";
 import "./App.css";
 import { slide as Menu } from 'react-burger-menu';
