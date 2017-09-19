@@ -3,7 +3,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import App from "../components/App";
+
+// APP Se importa pero nunca se usa
+
 class LoginScreen extends Component {
   constructor(props){
     super(props);
