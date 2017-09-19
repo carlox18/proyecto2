@@ -83,6 +83,7 @@ router.delete("/:id/members/:idAdmin/:idMember", function(req, res){
     if(indexRemoveM > -1 && admins.length > 0){
       members.splice(indexRemoveM, 1);
       Club.update(club._id, {members:members} , function(err, updatedClub){
+        // DEBERÍA MANEJAR EL ERROR
         res.status(200).json(updatedClub.members);
       });
     } else if(admins.length === 0){
@@ -98,6 +99,7 @@ router.post("/:id/members", function(req, res){
   var newUser = req.body.newUser;
 
   User.findById(newUser, function(err, user){
+    // DEBERÍA MANEJAR EL ERROR
     if(!user){
       res.status(400).json({message:"That user doesnt exist"});
     }
@@ -139,6 +141,7 @@ router.post("/:id/admins", function(req, res){
   var newAdmin = req.body.newUser;
 
   User.findById(newAdmin, function(err, user){
+    // DEBERÍA MANEJAR EL ERROR
     if(!user){
       return res.status(400).json({message:"That user doesnt exist"});
     }
