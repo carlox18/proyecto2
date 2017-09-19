@@ -11,6 +11,7 @@ module.exports = {
                     console.warn(xhr.responseText);
                     success(JSON.parse(xhr.responseText));
                 } else {
+                    // Se deben lanzar objetos
                     throw "URL " + url + " returned non-200 status: " + xhr.status + ":" + xhr.statusText;
                 }
                 
