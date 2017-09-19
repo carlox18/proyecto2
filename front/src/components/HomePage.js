@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomePage.css';
-import Header from "./Header";
-import Main from "./Main";
+
+// Header y Main nunca se usaban.
 
 class HomePage extends React.Component {
 	constructor(props){
