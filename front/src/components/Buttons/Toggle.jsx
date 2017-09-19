@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+// ProypTypes nunca se utilizaba.
+
 import classNames from 'classnames';
 
 export default class Toggle extends React.Component {
