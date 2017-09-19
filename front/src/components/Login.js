@@ -3,7 +3,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import React from 'react';
 import axios from 'axios';
-import App from "./App";
+
+// App nunca se usaba
+
 import HomePage from "./HomePage";
 
 
@@ -49,13 +51,13 @@ class Login extends React.Component {
    axios.post(apiBaseUrl, payload)
    .then(function (response) {
     console.log(response)
-    if(response.status == 200){
+    if(response.status === 200){
      window.alert("Login successfull");
      var homePage=[];
      homePage.push(<HomePage/>);
      self.props.appContext.setState({loginPage:[],mainPage:homePage,userId:response.data.data._id});
    }
-   else if(response.status == 204){
+   else if(response.status === 204){
      console.log("Username password do not match");
      alert("username password do not match")
    }
