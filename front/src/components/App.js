@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import Header from "./Header";
 import Main from "./Main";
-import LoginScreen from '../containers/LoginScreen';
-import HomePage from "./HomePage";
+
+// HomePage y LoginScreen se importan pero nunca se utilizaban.
+
 import Welcome from "./Welcome";
 
 
