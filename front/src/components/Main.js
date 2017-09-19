@@ -1,8 +1,8 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import LoginScreen from '../containers/LoginScreen';
-import Clubs from "./Clubs";
 
+// Clubs nunca se utilizaba.
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
