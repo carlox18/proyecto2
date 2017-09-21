@@ -8,7 +8,6 @@ module.exports = {
         xhr.onload = function() {
             try {                
                 if (xhr.status === 200) {
-                    console.warn(xhr.responseText);
                     success(JSON.parse(xhr.responseText));
                 } else {
                     throw "URL " + url + " returned non-200 status: " + xhr.status + ":" + xhr.statusText;

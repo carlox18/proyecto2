@@ -109,16 +109,16 @@ ul {
     padding: 10px;
     list-style-type: none;
 }
-#shuffle .list-item .robot-mug {
+#shuffle .list-item .club-mug {
     display: inline-block;
     width: 205px;
 }
-#shuffle .list-item .robot-name {
-    font-weight: 700;
+#shuffle .list-item .club-name {
+    font-weight: 500;
     color: #2e5794;
     clear: both;
 }
-#shuffle .list-item .robot-info, #shuffle .list-item .robot-other {
+#shuffle .list-item .club-info, #shuffle .list-item .club-other {
     display: inline-block;
     width: 210px;
     vertical-align: top;

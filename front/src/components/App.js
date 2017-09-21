@@ -3,7 +3,6 @@ import './App.css';
 import Header from "./Header";
 import Main from "./Main";
 import LoginScreen from '../containers/LoginScreen';
-import HomePage from "./HomePage";
 import Welcome from "./Welcome";
 import Clubs from "./Clubs";
 
@@ -20,6 +19,7 @@ class App extends React.Component {
 		}
 	}
   deleteUser(){
+  	console.log("tried")
   	this.setState({
   		userId:null
   	})

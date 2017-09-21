@@ -24,30 +24,41 @@ class Chat extends React.Component {
 			mensajes:this.props.messages
 		}
 	}
-	componentDidMount() {
+	componentDidMount(){
 		var element = document.getElementsByClassName("chat-history")[0];
-		element.scrollTop = element.scrollHeight;
+		element.scrollTop = element.scrollHeight - element.clientHeight;
 	}
+	componentDidUpdate() {
+		var element = document.getElementsByClassName("chat-history")[0];
+		element.scrollTop = element.scrollHeight - element.clientHeight;
+	}
+
 	render() {
-		const { _id,nombre, desc, keywords, ids_admin, members } = this.props;
+		
+		var { _id,nombre, desc, keywords, ids_admin, members, messages } = this.props;
 		const listClass = `list-item card`;
 		const style = { zIndex: 100 - this.props.index};
 		const self = this;
-		var messages = this.state.mensajes;
 		if(messages == undefined)
 			messages = [];
 		return (
 			<div className="chat">
 			<div className="chat-header clearfix">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+			<img/>
 			<div className="chat-about">
 			<div className="chat-with">{nombre}</div>
 			<div className="chat-num-messages">{desc}</div>
 			</div>
-			<i className="fa fa-star" />
+			<div className="dropdown">
+			<a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-cog" /></a>
+			<ul className="dropdown-menu">
+			<li><a href="#" onClick={(event) => this.handleClickDelete(event)}>Eliminar club <span className="glyphicon glyphicon-cog pull-right" /></a></li>
+			<li className="divider" />
+			</ul>
+			</div>
 			</div> 
 			<div className="chat-history">
-			<ul>
+			<ul className="list">
 			{messages.map(function(msg, index){
 				if( msg.sender == self.props.userId){
 					return(
@@ -102,6 +113,7 @@ class Chat extends React.Component {
 			console.log(response)
 			if(response.status == 200){
 				elem.value="";
+				self.props.messages = response.data;
 				self.setState({mensajes:response.data});
 
 			}
@@ -109,6 +121,9 @@ class Chat extends React.Component {
 		.catch(function (error) {
 			console.log(error);
 		});
+	}
+	handleClickDelete(event){
+		
 	}
 }
 

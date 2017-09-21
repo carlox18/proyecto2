@@ -5,7 +5,7 @@ import "./App.css";
 import { slide as Menu } from 'react-burger-menu';
 import LoginScreen from "../containers/LoginScreen";
 import Clubs from "./Clubs";
-import HomePage from "./HomePage";
+import AllClubs from "./AllClubs";
 
 // The Header creates links that can be used to navigate
 // between routes.
@@ -29,8 +29,8 @@ class Account extends React.Component{
       </p>
       </div>
       <div className="col-lg-8">
-      <p className="text-left"><strong>{this.props.parentContext.props.name}</strong></p>
-      <p className="text-left small">{this.props.parentContext.props.email}</p>
+      <p className="text-left"><strong>{this.props.name}</strong></p>
+      <p className="text-left small">{this.props.email}</p>
       <p className="text-left">
       </p>
       </div>
@@ -55,7 +55,7 @@ class Account extends React.Component{
       );
   }
   handleClick(event){
-    this.props.deleteUser;
+    this.props.deleteUser();
   }
 };
 
@@ -81,7 +81,7 @@ class Header extends React.Component {
       {!this.props.userId && <NavItem onClick={(event) => this.handleClick(event)}>Login/SignUp</NavItem>}
       <MenuItem divider />
       </Nav>
-      {this.props.userId && <div><Account deleteUser={this.props.deleteUser} parentContext={this}></Account></div>}
+      {this.props.userId && <div><Account name={this.props.name} email={this.props.email} deleteUser={this.props.deleteUser}></Account></div>}
       </Navbar>   
       );
   }
@@ -98,7 +98,7 @@ class Header extends React.Component {
   }
   handleClickExplore(event){
     var home=[];
-    home.push(<HomePage appContext ={this.props.appContext}/>);
+    home.push(<AllClubs appContext ={this.props.appContext}/>);
     this.props.appContext.setState({mainPage:home, loginPage:[]});
   }
 }

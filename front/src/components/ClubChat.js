@@ -12,7 +12,7 @@ const propTypes = {
   messages: PropTypes.object,
 };
 
-class RobotMaster extends React.Component {
+class ClubChat extends React.Component {
   constructor(props) {
     super(props);
 
@@ -35,15 +35,15 @@ class RobotMaster extends React.Component {
 
     return (
       <li className="clearfix" onClick={(event) => this.handleClick(event)}>
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-      <div className="about">{desc}
-      <div className="name">{nombre}</div>
+      <img src="" />
+      <div className="name">{nombre}
       <div className="status">
       <i className="fa fa-circle online" /> online
       </div>
       </div>
       </li>     
       );
+    
   }
   handleClick(event){
     var chat=[];
@@ -55,6 +55,6 @@ class RobotMaster extends React.Component {
 
 }
 
-RobotMaster.PropTypes = propTypes;
+ClubChat.PropTypes = propTypes;
 
-export default RobotMaster;
+export default ClubChat;

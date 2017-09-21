@@ -30,7 +30,9 @@
 .loginscreen{
   padding-top:25px;
 }
-
+.list{
+  list-style: none;
+}
 
 .people-list {
   width: 260px;
@@ -111,7 +113,7 @@
 .chat .chat-header .chat-num-messages {
   color: #92959E;
 }
-.chat .chat-header .fa-star {
+.chat .chat-header .fa-cog {
   float: right;
   color: #D8DADF;
   font-size: 20px;
@@ -164,15 +166,14 @@
   left: 93%;
 }
 .chat .chat-message {
-  padding: 30px;
+  padding: 10px;
   height: 100px;
 }
 .chat .chat-message textarea {
   width: 100%;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 10px;
   font: 14px/22px "Lato", Arial, sans-serif;
-  margin-bottom: 10px;
   border-radius: 5px;
   resize: none;
 }

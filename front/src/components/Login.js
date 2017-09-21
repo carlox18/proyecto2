@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import React from 'react';
 import axios from 'axios';
 import App from "./App";
-import HomePage from "./HomePage";
 import Clubs from "./Clubs";
 
 
@@ -49,12 +48,11 @@ class Login extends React.Component {
    }
    axios.post(apiBaseUrl, payload)
    .then(function (response) {
-    console.log(response)
     if(response.status == 200 && response.data != null){
      window.alert("Login successful");
      var home=[];
      home.push(<Clubs userId={response.data._id}/>);
-     self.props.appContext.setState({loginPage:[],mainPage:home,userId:response.data._id});
+     self.props.appContext.setState({loginPage:[],mainPage:home,userId:response.data._id,email:response.data.email,name:response.data.name});
    }
    else if(response.status == 204){
      console.log("Username password do not match");
